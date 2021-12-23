@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<title>Smart Parking System</title>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color:black;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+
+
+
+</style>
+
+
+<body class="w3-content" style="max-width:1200px">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
+    <div class="w3-container w3-display-container w3-padding-16">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <h3 class="w3-wide"><b></b></h3>
+        <img src="https://c.pxhere.com/photos/dd/ae/motor_clouds_background_ducati_scrambler-491843.jpg!d" alt="Jeans" style="width:100%">
+    </div>
+    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <a th:href="@{/mall}" class="w3-bar-item w3-button w3-light-grey">Info Mall</a>
+        <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
+            Daftar Parking disini <i class="fa fa-caret-down"></i>
+        </a>
+        <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+            <a th:href="@{/kendaraan}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Kendaraan</a>
+            <a th:href="@{/areaparkir}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Area Parkir</a>
+            <a th:href="@{/gedungparkir}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Gedung Parkir</a>
+            <a th:href="@{/parking}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Parking</a>
+            <a th:href="@{/sertifikat}" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>sertifikat</a>
+        </div>
+        <a th:href="@{/keluarparkir}" class="w3-bar-item w3-button w3-light-grey">keluar kendaraan</a>
+        <a th:href="@{/keamanan}" class="w3-bar-item w3-button w3-light-grey">Keamanan Parkir</a>
+        <a th:href="@{/mall/baca}" class="w3-bar-item w3-button w3-light-grey">Cek Harga</a>
+        <a href="#" class="w3-bar-item w3-button w3-light-grey"></a>
+    </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+    <div class="w3-bar-item w3-padding-24 w3-wide"></div>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+    <!-- Push down content on small screens -->
+    <div class="w3-hide-large" style="margin-top:83px"></div>
+
+    <!-- Top header -->
+    <header class="w3-container w3-xlarge">
+        <p class="w3-left">Smart Parking System</p>
+        <p class="w3-right">
+        </p>
+
+    </header>
+
+    <!-- Image header -->
+    <div class="w3-display-container w3-container">
+        <img src="https://c.pxhere.com/photos/dd/ae/motor_clouds_background_ducati_scrambler-491843.jpg!d" alt="Jeans" style="width:100%">
+        <div class="w3-display-topleft w3-text-black" style="padding:24px 48px">
+            <h1 class="w3-jumbo w3-hide-small">New Applications</h1>
+            <h1>And</h1>
+            <h1 class="w3-hide-small">New technology in 2020</h1>
+            <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">Follow SPS</a></p>
+            <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/1024px-Facebook_icon.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Facebook_icon.svg/1024px-Facebook_icon.svg.png" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+            </a>
+            <a target="_blank" href="https://i.pinimg.com/originals/4f/01/49/4f0149647a160a47217615866f5469c4.png">
+                <img src="https://i.pinimg.com/originals/4f/01/49/4f0149647a160a47217615866f5469c4.png" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+            </a>
+            <a target="_blank" href="https://cdn.pixabay.com/photo/2016/11/01/12/09/twitter-logo-1788039_960_720.jpg">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTO-aJvURxLK031yaPmeAkqtdsgfwZozrMZPkWKeUSJHXrt3hCv" class="rounded-circle" alt="Cinque Terre" width="50" height="50">
+            </a>
+
+        </div>
+    </div>
+
+
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h1><font color="black">Client</font></h1>
+        <pre></pre>
+        <a target="_blank" href="http://www.rts.com.my/wp-content/uploads/2017/08/intracs-scalia-person.png">
+            <img src="http://www.rts.com.my/wp-content/uploads/2017/08/intracs-scalia-person.png" class="rounded-circle" alt="Cinque Terre" width="100" height="100">
+        </a>
+        <a target="_blank" href="https://4.bp.blogspot.com/-sg58gYYCAt0/W9wWeHZ0-fI/AAAAAAAAPiA/p9V-swWTtpM7ulp0DtZKH1ZDjyMazEbMwCLcBGAs/s320/JasaMarga.png">
+            <img src="https://4.bp.blogspot.com/-sg58gYYCAt0/W9wWeHZ0-fI/AAAAAAAAPiA/p9V-swWTtpM7ulp0DtZKH1ZDjyMazEbMwCLcBGAs/s320/JasaMarga.png" class="rounded-circle" alt="Cinque Terre" width="100" height="100">
+        </a>
+        <a target="_blank" href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Coat_of_arms_of_Jakarta.svg/220px-Coat_of_arms_of_Jakarta.svg.png">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Coat_of_arms_of_Jakarta.svg/220px-Coat_of_arms_of_Jakarta.svg.png" class="rounded-circle" alt="Cinque Terre" width="100" height="100">
+        </a>
+        <a target="_blank" href="https://4.bp.blogspot.com/-zNFlxNWHcZ8/XA4B8Cu-YCI/AAAAAAAAC2k/MeF35gfwFZ4CnHsOtG-qw2IE1-Go1v2DACLcBGAs/w1200-h630-p-k-no-nu/AIRNAV%2BINDONESIA.jpg">
+            <img src="https://4.bp.blogspot.com/-zNFlxNWHcZ8/XA4B8Cu-YCI/AAAAAAAAC2k/MeF35gfwFZ4CnHsOtG-qw2IE1-Go1v2DACLcBGAs/w1200-h630-p-k-no-nu/AIRNAV%2BINDONESIA.jpg" class="rounded-circle" alt="Cinque Terre" width="100" height="100">
+        </a>
+        <a target="_blank" href="https://pbs.twimg.com/profile_images/1036619395114496000/WLwNsOax_400x400.jpg">
+            <img src="https://pbs.twimg.com/profile_images/1036619395114496000/WLwNsOax_400x400.jpg" class="rounded-circle" alt="Cinque Terre" width="100" height="100">
+        </a>
+    </div>
+
+
+
+<div class="jumbotron text-center">
+    <h1>TEAM PROGRAMMER</h1>
+    <div class="w3-container w3-light-red w3-padding-32">
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <img src="https://scontent.fcgk2-1.fna.fbcdn.net/v/t1.0-9/19429949_1484443158243890_4391707997426074931_n.jpg?_nc_cat=107&_nc_eui2=AeHyPDaSlwEfLlKbj99vDfB0at7y6OLBAcRPEYlPoqRkXOvMGMLM8LGAW5rtF3eT20k2dbcjnBM9C1TIweWz-FJDaNBuiT9iU6cU4A5gX4rAng&_nc_ohc=l7SYhTGZ5LEAX90hDOy&_nc_ht=scontent.fcgk2-1.fna&oh=490c52f3859b520019eba03249de8b25&oe=5ECE67B5" alt="Jane" style="width:100%">
+                    <div class="container">
+                        <h4>Andhika Rizki Pratama Putra</h4>
+                        <p class="title">IT DEVELOPER</p>
+                        <p>Im a Programmer</p>
+                        <p>Andhika.rizkipp@gmail.com</p>
+                        <a th:href="@{/programmerprofil/cek}"><button class="button">Andhika Rizki Pratama Putra</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <img src="https://scontent.fcgk2-1.fna.fbcdn.net/v/t1.0-9/19429949_1484443158243890_4391707997426074931_n.jpg?_nc_cat=107&_nc_eui2=AeHyPDaSlwEfLlKbj99vDfB0at7y6OLBAcRPEYlPoqRkXOvMGMLM8LGAW5rtF3eT20k2dbcjnBM9C1TIweWz-FJDaNBuiT9iU6cU4A5gX4rAng&_nc_ohc=l7SYhTGZ5LEAX90hDOy&_nc_ht=scontent.fcgk2-1.fna&oh=490c52f3859b520019eba03249de8b25&oe=5ECE67B5" alt="Mike" style="width:100%">
+                    <div class="container">
+                        <h4>Andhika Rizki Pratama Putra</h4>
+                        <p class="title">IT DEVELOPER</p>
+                        <p>Im a Programmer</p>
+                        <p>Andhika.rizkipp@gmail.com</p>
+                        <a th:href="@{/programmerprofil/cek}"><button class="button">Andhika Rizki Pratama Putra</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <img src="https://scontent.fcgk2-1.fna.fbcdn.net/v/t1.0-9/19429949_1484443158243890_4391707997426074931_n.jpg?_nc_cat=107&_nc_eui2=AeHyPDaSlwEfLlKbj99vDfB0at7y6OLBAcRPEYlPoqRkXOvMGMLM8LGAW5rtF3eT20k2dbcjnBM9C1TIweWz-FJDaNBuiT9iU6cU4A5gX4rAng&_nc_ohc=l7SYhTGZ5LEAX90hDOy&_nc_ht=scontent.fcgk2-1.fna&oh=490c52f3859b520019eba03249de8b25&oe=5ECE67B5" alt="John" style="width:100%">
+                    <div class="container">
+                        <h4>Andhika Rizki Pratama Putra</h4>
+                        <p class="title">IT DEVELOPER</p>
+                        <p>Im a Programmer</p>
+                        <p>Andhika.rizkipp@gmail.com</p>
+                        <a th:href="@{/programmerprofil/cek}"><button class="button">Andhika Rizki Pratama Putra</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="text-center">
+        <h3>Mall-Mall yang berkerja sama dengan Kami</h3>
+    </div>
+
+    <div class="w3-row w3-grayscale">
+        <div class="w3-col l3 s6">
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://cdn-image.bisnis.com/posts/2019/01/14/878385/pondok-indah-mal.jpg" style="width:100%">
+                     <div class="w3-display-middle w3-display-hover">
+                      <button class="w3-button w3-black">Pondok indah Mall</button>
+                    </div>
+                </div>
+                    <p><br><b></b></p>
+            </div>
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://3.bp.blogspot.com/-p7VvZ_6DZo4/VjHZ_pKGRII/AAAAAAAAGso/bUPGUpnaSNw/s1600/Mall%2BGI.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black"> Grand Indonesia </button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+        </div>
+
+        <div class="w3-col l3 s6">
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://www.klikhotel.com/klik/database/informasiSekitarLokasi/1925-850.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black"> Mall Artha Gading </button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://cdn-image.bisnis.com/posts/2014/09/08/255872/pacific-place.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Pacific Place </button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+        </div>
+
+        <div class="w3-col l3 s6">
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/0b/48/72/00/photo0jpg.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Gandaria City</button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://maisonderes.s3.ap-southeast-1.amazonaws.com/mdr/filemanager/superblock_kuningan_city.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Mall Kuningan City </button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+        </div>
+
+        <div class="w3-col l3 s6">
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://awsimages.detik.net.id/community/media/visual/2016/09/01/e6355e1d-4b3d-4d69-a4b3-b0ab199b365d_169.jpg?w=700&q=90" style="width:120%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Lippo Mall Kemang</button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+            <div class="w3-container">
+                <div class="w3-display-container">
+                    <img src="https://inilahonline.com/wp-content/uploads/2019/02/mal-taman-anggrek-jakarta.jpg" style="width:100%">
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Mall Taman Anggrek</button>
+                    </div>
+                </div>
+                <p><br><b></b></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w3-container w3-padding-32 w3-grey">
+        <div class="w3-row-padding">
+            <div class="w3-third">
+                <h3>INFO</h3>
+                <p>Selamat datang di SMART PARKING SYSTEM dan semoga anda menyukai program parkir yang kami buat.</p>
+            </div>
+
+            <div class="w3-third">
+                <h3>Kendaraan</h3>
+                <ul class="w3-ul">
+                    <li class="w3-padding-16 w3-hover-black">
+                        <img src="https://imgx.motorplus-online.com/crop/0x0:0x0/360x240/photo/2019/04/21/616620695.jpg" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Motor</span><br>
+                        <span></span>
+                    </li>
+                    <li class="w3-padding-16 w3-hover-black">
+                        <img src="https://cdn.akurat.co/images/uploads/images/akurat_20181118075733_WdyK48.jpg" class="w3-left w3-margin-right" style="width:50px">
+                        <span class="w3-large">Mobil</span><br>
+                        <span></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="w3-third">
+                <h3>MALL</h3>
+                <p>
+                    <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Mall Pondok indah</span> <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Mall Kuningan City</span>
+                    <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Grand Indonesia</span> <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Lippo Mall Kemang</span>
+                    <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Mall Artha Gading</span> <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Mall Taman Anggrek</span>
+                    <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Pacific Place</span>
+                    <span class="w3-tag w3-dark-grey w3-small w3-hover-black w3-margin-bottom">Gandaria City</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="http://localhost:8002/sps/" title="W3.CSS" target="_blank" class="w3-hover-opacity">SPS</a></div>
+
+    <!-- End page content -->
+</div>
+
+<script>
+// Accordion
+function myAccFunc() {
+  var x = document.getElementById("demoAcc");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+document.getElementById("myBtn").click();
+
+
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+
+</body>
+</html>

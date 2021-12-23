@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <!-- Menyisipkan Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+    <title>Beranda</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <h4>Daftar Booking Parking</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <form class="form-horizontal" role="form"gedungParkir
+                          th:action="@{/parking/create}"
+                          th:object="${data}"
+                          method="post"
+
+                    >
+                        <div class="form-group row">
+                            <label for="idKendaraan-i" class="col-sm-2 col-form-label">Kendaraan</label>
+                            <div class="col-sm-10">
+                                <select class="form-control select2" id="idKendaraan-i"
+                                        name="idKendaraan"
+                                        required
+                                >
+                                    <option value="">--pilih--</option>
+                                    <option th:each="k: ${kendaraanList}" th:text="${k.getPlat()}"
+                                            th:value="${k.getId()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                              <label for="waktuBooking-i" class="col-sm-2 col-form-label">Waktu Booking</label>
+                              <div class="col-sm-10">
+                                    <input type="datetime-local" class="form-control"
+                                           name="waktuBookingString"
+                                           id="waktuBooking-i"
+                                           placeholder="WaktuBooking">
+                              </div>
+                         </div>
+
+
+                        <div class="form-group row">
+                            <label for="idGedungParkir-i" class="col-sm-2 col-form-label">Gedung Parkir</label>
+                            <div class="col-sm-10">
+                                <select class="form-control select2" id="idGedungParkir-i"
+                                        name="idGedungParkir"
+                                        required
+                                >
+                                    <option value="">--pilih--</option>
+                                    <option th:each="gp: ${gedungParkirList}" th:text="${gp.getNama()}"
+                                            th:value="${gp.getId()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+
+
+
+                            <head>
+                                <style>
+                                        body {
+                                            background-image: url("https://img.freepik.com/free-vector/blue-abstract-acrylic-brush-stroke-textured-background_53876-86373.jpg?size=626&ext=jpg");
+                                        }
+                                </style>
+                            </head>
+                        </div>
+                    </form>
+                </div>  <!-- end row -->
+            </div>
+        </div><!-- end col-12 -->
+    </div> <!-- end row -->
+    </div>
+</th:block>
+
+<!-- Menyisipkan JQuery dan Javascript Bootstrap -->
+<div class="row">
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

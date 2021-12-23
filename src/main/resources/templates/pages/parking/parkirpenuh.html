@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <!-- Menyisipkan Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+
+    <title>Beranda</title>
+</head>
+<th:block layout:fragment="content">
+    <button> <h2>Maaf Parkiran Sedang Penuh</h2> </button>
+
+
+</th:block>

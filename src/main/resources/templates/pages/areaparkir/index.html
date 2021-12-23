@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <!-- Menyisipkan Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
+    <title>Beranda</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <h2>Daftar Area Parkir </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <div class="row">
+                        <a th:href="@{/areaparkir/tambah}" type="button" class="btn btn-primary"> Tambah Area Parkir</a>
+                    </div>
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>GedungParkir</th>
+                                    <th>Jenis</th>
+                                    <th>Kode</th>
+                                    <th>Lokasi</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="k: ${areaParkirList}">
+                                    <td th:text="${kStat.count}"></td>
+                                    <td th:text="${k?.getGedungParkir()?.getNama()}"></td>
+                                    <td th:text="${k?.getJenisLabel()}"></td>
+                                    <td th:text="${k.getKode()}"></td>
+                                    <td th:text="${k.getLokasi()}"></td>
+                                </tr>
+                            </tbody>
+                            <head>
+                                <style>
+                                        body {
+                                            background-image: url("https://img.freepik.com/free-vector/gradient-geometric-shape-background_78532-307.jpg?size=626&ext=jpg");
+                                        }
+                                </style>
+                            </head>
+                        </table>
+                    </div>  <!-- end row -->
+                </div>
+            </div><!-- end col-12 -->
+        </div> <!-- end row -->
+    </div>
+</th:block>
+
+<!-- Menyisipkan JQuery dan Javascript Bootstrap -->
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

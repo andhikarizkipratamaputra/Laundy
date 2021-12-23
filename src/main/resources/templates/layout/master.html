@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Class Room</title>
+        <meta name="description" content="Class Room."/>
+        <meta name="keywords"
+              content="Class Room IULI"/>
+        <meta name="author" content="https://lua.co.id"/>
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+
+        <th:block layout:fragment="page_css"/>
+    </head>
+    <body>
+        <!-- Begin page -->
+        <div id="wrapper">
+            <th:block th:replace="layout/top-menu"/>
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container-fluid" style="padding-right:5px; padding-left:5px;">
+                        <th:block layout:fragment="content"/>
+                    </div> <!-- container -->
+                </div> <!-- content -->
+                <footer class="footer text-right">
+                    2019 © Powered by <a href="http://lua.co.id" target="_blank">Lua Indonesia</a> - <a href="http://dephub.go.id" target="_blank">Iuli </a>
+                </footer>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- /#wrapper -->
+        <!-- jQuery  -->
+        <script th:src="@{/js/jquery.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+
+        <th:block layout:fragment="page_js"/>
+    </body>
+</html>

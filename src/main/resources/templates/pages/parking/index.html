@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <!-- Menyisipkan Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <title>Beranda</title>
+</head>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <h2>Daftar Booking Parking</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-box">
+                    <div class="row">
+                        <a th:href="@{/parking/tambah}" type="button" class="btn btn-primary"> Booking Parkiran</a>
+                    </div>
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Waktu Booking</th>
+                                <th>Plat</th>
+                                <th>Lokasi Parkir</th>
+                                <th>Kode Lokasi Parkir</th>
+                                <th>Kode Booking</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="k: ${parkingList}">
+                                    <td th:text="${kStat.count}"></td>
+                                    <td th:text="${k.getWaktuBooking()}"></td>
+                                    <td th:text="${k.getKendaraan().getPlat()}"></td>
+                                    <td th:text="${k.getAreaParkir().getLokasi()}"></td>
+                                    <td th:text="${k.getAreaParkir().getKode()}"></td>
+                                    <td th:text="${k.getKodeBooking()}"></td>
+                                    <td>
+                                        <a th:href="@{'/qr/'+${k.getKodeBooking()}+'.png'}">
+                                            <img th:src="@{'/qr/'+${k.getKodeBooking()}+'.png'}"
+                                                style="width: auto;height:100px;" />
+                                        </a>
+                                    </td>
+
+
+                                        <head>
+                                            <style>
+                                                body {
+                                                    background-image: url("https://img.freepik.com/free-vector/blue-abstract-acrylic-brush-stroke-textured-background_53876-86373.jpg?size=626&ext=jpg");
+                                                }
+                                            </style>
+                                        </head>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  <!-- end row -->
+
+                </div>
+            </div><!-- end col-12 -->
+        </div> <!-- end row -->
+    </div>
+</th:block>
+</html>
