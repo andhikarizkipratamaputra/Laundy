@@ -3,45 +3,70 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-        <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Class Room</title>
-        <meta name="description" content="Class Room."/>
-        <meta name="keywords"
-              content="Class Room IULI"/>
-        <meta name="author" content="https://lua.co.id"/>
-        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}">
+        <title>Co-Working Space</title>
+        <!-- Custom CSS -->
+        <link th:href="@{/dist/css/style.min.css}" rel="stylesheet">
+        <th:block layout:fragment="content_css" />
 
-        <th:block layout:fragment="page_css"/>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <!-- Begin page -->
-        <div id="wrapper">
-            <th:block th:replace="layout/top-menu"/>
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container-fluid" style="padding-right:5px; padding-left:5px;">
-                        <th:block layout:fragment="content"/>
-                    </div> <!-- container -->
-                </div> <!-- content -->
-                <footer class="footer text-right">
-                    2019 © Powered by <a href="http://lua.co.id" target="_blank">Lua Indonesia</a> - <a href="http://dephub.go.id" target="_blank">Iuli </a>
-                </footer>
-
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
         </div>
-        <!-- /#wrapper -->
-        <!-- jQuery  -->
-        <script th:src="@{/js/jquery.min.js}"></script>
-        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+            <!--TopMenu-->
+            <th:block th:replace="layout/top-menu"/>
+            <th:block th:replace="layout/left-menu"/>
 
-        <th:block layout:fragment="page_js"/>
+            <div class="page-wrapper">
+                <!--MainContent-->
+                <th:block layout:fragment="content"/>
+            </div>
+        </div>
+
+        <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+        <script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- apps -->
+        <script th:src="@{/dist/js/app.min.js}"></script>
+        <script th:src="@{/dist/js/app.init.mini-sidebar.js}"></script>
+        <script th:src="@{/dist/js/app-style-switcher.js}"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+        <script th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
+        <!--Wave Effects -->
+        <script th:src="@{/dist/js/waves.js}"></script>
+        <!--Menu sidebar -->
+        <script th:src="@{/dist/js/sidebarmenu.js}"></script>
+        <!--Custom JavaScript -->
+        <script th:src="@{/dist/js/custom.min.js}"></script>
+        <!-- Fragment JS-->
+        <th:block layout:fragment="content_js" />
+
     </body>
 </html>
